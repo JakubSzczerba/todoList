@@ -1,0 +1,65 @@
+.App {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  padding: 20px; /* Dodaj wypełnienie na górze i dołu */
+}
+
+.task-form {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.task-form input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+  width: 300px;
+  flex-grow: 1; /* Rozciągnij pole na całą dostępną szerokość */
+}
+
+.task-form button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.task-form button:hover {
+  background-color: #0056b3;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style-type: none; /* Usuń domyślną stylizację listy */
+  padding: 0; /* Usuń wypełnienie dla listy */
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  border: 1px solid #ccc; /* Dodaj lekkie obramowanie */
+  border-radius: 5px;
+  padding: 10px; /* Dodaj wypełnienie wokół elementu */
+  width: 300px;
+  justify-content: space-between; /* Rozstaw elementy na boki */
+}
+
+.task-item input[type="checkbox"] {
+  margin-right: 10px;
+  cursor: pointer; /* Zmień kursor na wskaźnik */
+}
+
+.completed {
+  text-decoration: line-through;
+}

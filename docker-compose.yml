@@ -1,0 +1,46 @@
+version: '3.8'
+services:
+  db:
+    image: mariadb:10.5
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_LOGIN: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: todolist
+    volumes:
+      - db-data:/var/lib/mysql:rw
+  php:
+    build:
+      context: ./Backend/docker/php
+    volumes:
+      - ./Backend:/var/www/ToDoList/Backend:delegated
+    links:
+      - db
+    environment:
+      DATABASE_URL: "mysql://root:root@db:3306/todolist"
+      APP_URL: "http://todolist.local:8099"
+      APP_ENV: "dev"
+      APP_SECRET: "ndu5tb2ald1bt3i2279888xdia13le4b"
+      APP_HOSTNAME: "todolist.local"
+      CORS_ALLOW_ORIGIN: true
+  nginx:
+    image: nginx:1.19
+    ports:
+      - "8099:80"
+    volumes:
+      - ./Backend:/var/www/ToDoList/Backend:delegated
+      - ./Backend/docker/nginx:/etc/nginx/conf.d
+    depends_on:
+      - php
+  frontend:
+    build:
+      context: ./Frontend
+    ports:
+      - "3000:3000"
+    environment:
+      REACT_APP_API_URL: "http://todolist.local:8099"
+    volumes:
+      - ./Frontend:/app
+volumes:
+  db-data:
